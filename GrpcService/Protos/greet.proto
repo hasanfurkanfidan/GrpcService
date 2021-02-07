@@ -1,16 +1,18 @@
 syntax = "proto3";
 
 option csharp_namespace = "GrpcService";
-
+// option => ilgili servicelerin namespaci
 package greet;
 
 // The greeting service definition.
+// service => Say hello metodu olacak diyo serverda
 service Greeter {
   // Sends a greeting
   rpc SayHello (HelloRequest) returns (HelloReply);
 }
 
 // The request message containing the user's name.
+// messagelar => client ile server arasýndaki veri iletiþiminde kullanýlacak veri türü
 message HelloRequest {
   string name = 1;
 }
