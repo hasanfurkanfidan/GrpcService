@@ -10,6 +10,9 @@ service Message {
   // Sends a greeting
   rpc SendMessage (MessageRequest) returns (MessageResponse);
   rpc SendMessageStream (MessageRequest) returns (stream MessageResponse);
+  rpc SendMessageStreamFromClient (stream MessageRequest) returns (MessageResponse);
+  rpc SendMessageStreamBiDirectioanal (stream MessageRequest) returns (stream MessageResponse);
+
  
 }
 

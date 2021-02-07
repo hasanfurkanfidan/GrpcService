@@ -28,5 +28,29 @@ namespace GrpcMessageService
 
             }
         }
+        public  override async Task<MessageResponse> SendMessageStreamFromClient(IAsyncStreamReader<MessageRequest> requestStream, ServerCallContext context)
+        {
+            var response = new MessageResponse();
+            while(await requestStream.MoveNext())
+            {
+                response.Message = $"{requestStream.Current.Name } adlı kullanıcı size {requestStream.Current.Message} mesajını gönderdi";
+            }
+            return response;
+        }
+        public override async Task SendMessageStreamBiDirectioanal(IAsyncStreamReader<MessageRequest> requestStream, IServerStreamWriter<MessageResponse> responseStream, ServerCallContext context)
+        {
+            while(await requestStream.MoveNext())
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    await responseStream.WriteAsync(new MessageResponse
+                    {
+                        Message = $"{requestStream.Current.Name } adlı kullanıcı size {requestStream.Current.Message} mesajını gönderdi"
+                    });
+                }
+               
+
+            }
+        }
     }
 }
